@@ -33,6 +33,22 @@ class Inspermon:
         self.vd_default=dicionario[inspermon]["Pontos de vida"]
         self.dif=dicionario[inspermon]["Dificuldade"]
 
+    def capturar(self,adversario):
+        sorteio=randint(1,4)
+        if sorteio==1 or sorteio==2:
+            self.nome=adversario.nome
+            self.at=adversario.at
+            self.df=adversario.df
+            self.vd=adversario.vd
+            self.est=adversario.est
+            self.exp=adversario.exp
+            self.vd_default=adversario.vd_default
+            self.dif=adversario.dif
+            print(timer("\n Parabéns você conseguiu capturar {} , agora ele é o seu novo companheiro!".format(seupersonagem.nome),delay))
+        if sorteio==3 or sorteio==4:
+            print(timer("\n Parece que não foi possível capturar {} e ele acabou fugindo".format(adversario.nome),delay))
+
+        
 
     def reset(self,adversario):
         self.vd=self.vd_default
@@ -189,9 +205,9 @@ if iniciar==1:
 if iniciar==0:
 
 
-    print(timer("\nAqui estão os jogos salvos\n",delay))
+    print(timer("\nAqui está o jogo salvo\n",delay))
     for s in salvar.keys():
-        print (s)
+        print (timer(s,delay))
     escolha_do_save=input(timer("\nDigite seu save\n",delay))
         
     if escolha_do_save in salvar:
@@ -214,7 +230,7 @@ while True:
                      #
                     print(timer("\n  Um salvagem {} apareceu...".format(adversario),delay))
                     adversario=Inspermon(personagem,adversario)
-                    batalhar=int(input("\n    Deseja enfrenta-lo?\nSim(0)\nNão(1)\n\n"))
+                    batalhar=int(input("\n    Deseja enfrenta-lo?\nSim(0)\nNão(1)\nTentar Captura-lo(2)\n\n"))
                     if batalhar==0:
 
                         resultado_batalha= seupersonagem.batalha(adversario)   
@@ -233,6 +249,10 @@ while True:
                             print(resultado_batalha)
                             
                             
+                        continue
+
+                    elif batalhar==2 :
+                        seupersonagem.capturar(adversario)
                         continue
 
                 if escolha==1 :  
